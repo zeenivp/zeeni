@@ -1,657 +1,567 @@
 <!DOCTYPE html>
-<html lang="en">
-<head></head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>zeeni — Full Stack Developer</title>
-  <meta name="description" content="Zeenat (zeeni) — beginner full stack web developer building with Nuxt, NuxtHub, and Cloudflare." />
+<html lang="en" class="scroll-smooth">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hafiza Zeenat — Web Developer</title>
 
-  <style>
-    /* ── Reset & Base ── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <!-- Tailwind CSS v4 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-    :root {
-      --bg:        #0a0a0f;
-      --surface:   #111118;
-      --border:    #1e1e2e;
-      --text:      #e2e2f0;
-      --muted:     #6b6b8a;
-      --accent:    #818cf8;        /* indigo */
-      --accent2:   #34d399;        /* emerald */
-      --accent3:   #f472b6;        /* pink */
-      --radius:    12px;
-      --mono:      'JetBrains Mono', monospace;
-      --sans:      'Inter', system-ui, sans-serif;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--sans);
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    a { color: inherit; text-decoration: none; }
-
-    /* ── Noise texture overlay ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.4;
-    }
-
-    /* ── Gradient blobs ── */
-    .blob {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(120px);
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.12;
-    }
-    .blob-1 { width: 600px; height: 600px; background: var(--accent); top: -200px; left: -200px; }
-    .blob-2 { width: 500px; height: 500px; background: var(--accent2); bottom: -150px; right: -150px; }
-    .blob-3 { width: 400px; height: 400px; background: var(--accent3); top: 40%; left: 40%; }
-
-    /* ── Layout ── */
-    .wrapper {
-      position: relative;
-      z-index: 1;
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* ── Nav ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      background: rgba(10, 10, 15, 0.7);
-    }
-    nav .wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 16px;
-      padding-bottom: 16px;
-    }
-    .nav-logo {
-      font-family: var(--mono);
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--accent);
-      letter-spacing: -0.02em;
-    }
-    .nav-logo span { color: var(--muted); }
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: 0.85rem;
-      color: var(--muted);
-      transition: color 0.2s;
-      font-weight: 500;
-    }
-    .nav-links a:hover { color: var(--text); }
-
-    /* ── Hero ── */
-    .hero {
-      padding: 96px 0 80px;
-    }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--accent2);
-      background: rgba(52, 211, 153, 0.08);
-      border: 1px solid rgba(52, 211, 153, 0.2);
-      padding: 5px 14px;
-      border-radius: 99px;
-      margin-bottom: 28px;
-      letter-spacing: 0.04em;
-    }
-    .hero-badge::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent2);
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
-    }
-    .hero h1 {
-      font-size: clamp(2.4rem, 6vw, 3.6rem);
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-      margin-bottom: 20px;
-    }
-    .hero h1 .name { color: var(--accent); }
-    .hero h1 .at    { color: var(--muted); font-weight: 300; }
-    .hero-desc {
-      font-size: 1.05rem;
-      color: var(--muted);
-      max-width: 520px;
-      margin-bottom: 36px;
-      line-height: 1.75;
-    }
-    .hero-desc strong { color: var(--text); font-weight: 500; }
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 22px;
-      border-radius: 8px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s;
-      border: none;
-    }
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-    }
-    .btn-primary:hover { background: #6366f1; transform: translateY(-1px); }
-    .btn-ghost {
-      background: transparent;
-      color: var(--muted);
-      border: 1px solid var(--border);
-    }
-    .btn-ghost:hover { color: var(--text); border-color: var(--muted); }
-
-    /* ── Section shared ── */
-    section { padding: 72px 0; }
-    .section-label {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: var(--accent);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-    .section-title {
-      font-size: 1.6rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: 40px;
-    }
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0;
-    }
-
-    /* ── Stack ── */
-    .stack-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 12px;
-    }
-    .stack-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px 18px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .stack-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-    .stack-icon {
-      font-size: 1.4rem;
-      line-height: 1;
-      flex-shrink: 0;
-    }
-    .stack-info { min-width: 0; }
-    .stack-name {
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text);
-      white-space: nowrap;
-    }
-    .stack-tag {
-      font-size: 0.7rem;
-      color: var(--muted);
-      font-family: var(--mono);
-    }
-
-    /* ── Projects ── */
-    .projects-grid {
-      display: grid;
-      gap: 16px;
-    }
-    .project-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
-      transition: border-color 0.2s, transform 0.2s;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .project-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-    .project-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-    }
-    .project-title {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-    .project-status {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      padding: 3px 10px;
-      border-radius: 99px;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .status-wip {
-      background: rgba(244, 114, 182, 0.1);
-      color: var(--accent3);
-      border: 1px solid rgba(244, 114, 182, 0.2);
-    }
-    .status-live {
-      background: rgba(52, 211, 153, 0.1);
-      color: var(--accent2);
-      border: 1px solid rgba(52, 211, 153, 0.2);
-    }
-    .status-idea {
-      background: rgba(129, 140, 248, 0.1);
-      color: var(--accent);
-      border: 1px solid rgba(129, 140, 248, 0.2);
-    }
-    .project-desc {
-      font-size: 0.875rem;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-    .project-tech {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .tech-pill {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      padding: 3px 10px;
-      border-radius: 99px;
-      background: rgba(129, 140, 248, 0.07);
-      color: var(--accent);
-      border: 1px solid rgba(129, 140, 248, 0.15);
-    }
-
-    /* ── About ── */
-    .about-text {
-      font-size: 0.95rem;
-      color: var(--muted);
-      line-height: 1.8;
-      max-width: 580px;
-    }
-    .about-text strong { color: var(--text); font-weight: 500; }
-    .about-text p + p { margin-top: 16px; }
-
-    /* ── Contact ── */
-    .contact-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 36px;
-      text-align: center;
-    }
-    .contact-box h3 {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-    .contact-box p {
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-bottom: 24px;
-    }
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .contact-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      transition: all 0.2s;
-    }
-    .contact-link:hover { border-color: var(--accent); color: var(--text); }
-
-    /* ── Footer ── */
-    footer {
-      padding: 32px 0;
-      border-top: 1px solid var(--border);
-    }
-    footer .wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .footer-text {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-    .footer-text a { color: var(--accent); }
-    .footer-text a:hover { text-decoration: underline; }
-
-    /* ── Responsive ── */
-    @media (max-width: 540px) {
-      .hero { padding: 72px 0 56px; }
-      .nav-links { gap: 18px; }
-      .stack-grid { grid-template-columns: 1fr 1fr; }
-      .contact-box { padding: 24px 20px; }
-    }
-  </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
 </head>
-<body>
 
-  <!-- Background blobs -->
-  <div class="blob blob-1" aria-hidden="true"></div>
-  <div class="blob blob-2" aria-hidden="true"></div>
-  <div class="blob blob-3" aria-hidden="true"></div>
+<body class="bg-slate-900 text-slate-200 font-[Inter,sans-serif] antialiased">
 
-  <!-- Nav -->
-  <nav aria-label="Main navigation">
-    <div class="wrapper">
-      <span class="nav-logo">zeeni<span>.vp</span></span>
-      <ul class="nav-links">
-        <li><a href="#stack">Stack</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- Hero -->
-  <main>
-    <div class="wrapper">
-      <section class="hero" aria-labelledby="hero-heading">
-        <div class="hero-badge">available for work</div>
-        <h1 id="hero-heading">
-          <span class="at">hi, I'm </span><span class="name">Zeenat</span><br />
-          full stack dev
-        </h1>
-        <p class="hero-desc">
-          Building with <strong>Nuxt</strong>, <strong>NuxtHub</strong> &amp; <strong>Cloudflare</strong> —
-          learning by shipping. I like clean UIs, edge deployments, and turning ideas into real things.
-        </p>
-        <div class="hero-actions">
-          <a href="#projects" class="btn btn-primary">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-            See my work
-          </a>
-          <a href="#contact" class="btn btn-ghost">Get in touch</a>
-        </div>
-      </section>
-
-      <hr class="divider" />
-
-      <!-- Stack -->
-      <section id="stack" aria-labelledby="stack-heading">
-        <p class="section-label">// tech stack</p>
-        <h2 class="section-title" id="stack-heading">What I build with</h2>
-
-        <div class="stack-grid">
-          <div class="stack-card">
-            <span class="stack-icon">💚</span>
-            <div class="stack-info">
-              <div class="stack-name">Nuxt</div>
-              <div class="stack-tag">framework</div>
+    <!-- ── NAV ── -->
+    <nav class="fixed top-0 inset-x-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-700/50">
+        <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+            <span
+                class="text-lg font-black bg-gradient-to-r from-violet-400 to-violet-600 bg-clip-text text-transparent">
+                Hafiza Zeenat.
+            </span>
+            <div class="hidden md:flex gap-8 text-sm text-slate-400 font-medium">
+                <a href="#about" class="hover:text-violet-400 transition-colors">About</a>
+                <a href="#stack" class="hover:text-violet-400 transition-colors">Stack</a>
+                <a href="#projects" class="hover:text-violet-400 transition-colors">Projects</a>
+                <a href="#contact" class="hover:text-violet-400 transition-colors">Contact</a>
             </div>
-          </div>
-          <div class="stack-card">
-            <span class="stack-icon">🌐</span>
-            <div class="stack-info">
-              <div class="stack-name">NuxtHub</div>
-              <div class="stack-tag">deployment</div>
-            </div>
-          </div>
-          <div class="stack-card">
-            <span class="stack-icon">🟠</span>
-            <div class="stack-info">
-              <div class="stack-name">Cloudflare</div>
-              <div class="stack-tag">platform</div>
-            </div>
-          </div>
-          <div class="stack-card">
-            <span class="stack-icon">🗄️</span>
-            <div class="stack-info">
-              <div class="stack-name">D1</div>
-              <div class="stack-tag">sql database</div>
-            </div>
-          </div>
-          <div class="stack-card">
-            <span class="stack-icon">⚡</span>
-            <div class="stack-info">
-              <div class="stack-name">KV</div>
-              <div class="stack-tag">key-value store</div>
-            </div>
-          </div>
-          <div class="stack-card">
-            <span class="stack-icon">🪣</span>
-            <div class="stack-info">
-              <div class="stack-name">R2 Blob</div>
-              <div class="stack-tag">object storage</div>
-            </div>
-          </div>
-          <div class="stack-card">
-            <span class="stack-icon">🚀</span>
-            <div class="stack-info">
-              <div class="stack-name">Cache API</div>
-              <div class="stack-tag">edge cache</div>
-            </div>
-          </div>
-          <div class="stack-card">
-            <span class="stack-icon">🎨</span>
-            <div class="stack-info">
-              <div class="stack-name">Nuxt UI</div>
-              <div class="stack-tag">components</div>
-            </div>
-          </div>
-          <div class="stack-card">
-            <span class="stack-icon">⚗️</span>
-            <div class="stack-info">
-              <div class="stack-name">Vite</div>
-              <div class="stack-tag">build tool</div>
-            </div>
-          </div>
-          <div class="stack-card">
-            <span class="stack-icon">🔷</span>
-            <div class="stack-info">
-              <div class="stack-name">TypeScript</div>
-              <div class="stack-tag">language</div>
-            </div>
-          </div>
-          <div class="stack-card">
-            <span class="stack-icon">🐙</span>
-            <div class="stack-info">
-              <div class="stack-name">GitHub</div>
-              <div class="stack-tag">version control</div>
-            </div>
-          </div>
-          <div class="stack-card">
-            <span class="stack-icon">🌿</span>
-            <div class="stack-info">
-              <div class="stack-name">Vue 3</div>
-              <div class="stack-tag">ui library</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <hr class="divider" />
-
-      <!-- Projects -->
-      <section id="projects" aria-labelledby="projects-heading">
-        <p class="section-label">// projects</p>
-        <h2 class="section-title" id="projects-heading">Things I've built</h2>
-
-        <div class="projects-grid">
-          <article class="project-card">
-            <div class="project-header">
-              <h3 class="project-title">This Portfolio</h3>
-              <span class="project-status status-live">live</span>
-            </div>
-            <p class="project-desc">
-              My corner of the internet. A clean static portfolio deployed on Cloudflare Pages — 
-              no frameworks, just hand-crafted HTML &amp; CSS. The foundation for what comes next.
-            </p>
-            <div class="project-tech">
-              <span class="tech-pill">HTML</span>
-              <span class="tech-pill">CSS</span>
-              <span class="tech-pill">Cloudflare Pages</span>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-header">
-              <h3 class="project-title">NuxtHub Starter App</h3>
-              <span class="project-status status-wip">wip</span>
-            </div>
-            <p class="project-desc">
-              Exploring NuxtHub with Cloudflare D1, KV, and Blob storage. Building out 
-              CRUD patterns and edge-side caching to understand how full stack Nuxt feels in production.
-            </p>
-            <div class="project-tech">
-              <span class="tech-pill">Nuxt</span>
-              <span class="tech-pill">NuxtHub</span>
-              <span class="tech-pill">D1</span>
-              <span class="tech-pill">KV</span>
-              <span class="tech-pill">Nuxt UI</span>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-header">
-              <h3 class="project-title">Edge Notes</h3>
-              <span class="project-status status-idea">idea</span>
-            </div>
-            <p class="project-desc">
-              A minimal note-taking app running entirely at the edge. Notes stored in Cloudflare KV, 
-              attachments in R2 Blob, fast reads with Cache API — and a clean Nuxt UI interface.
-            </p>
-            <div class="project-tech">
-              <span class="tech-pill">Nuxt</span>
-              <span class="tech-pill">KV</span>
-              <span class="tech-pill">R2 Blob</span>
-              <span class="tech-pill">Cache API</span>
-              <span class="tech-pill">Nuxt UI</span>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <hr class="divider" />
-
-      <!-- About -->
-      <section id="about" aria-labelledby="about-heading">
-        <p class="section-label">// about</p>
-        <h2 class="section-title" id="about-heading">A little about me</h2>
-
-        <div class="about-text">
-          <p>
-            I'm <strong>Zeenat</strong> — online I go by <strong>zeeni</strong> or <strong>zeenivp</strong>. 
-            I'm a beginner full stack developer falling deeper into the <strong>Nuxt</strong> and 
-            <strong>Cloudflare</strong> ecosystem one project at a time.
-          </p>
-          <p>
-            The edge computing model clicked for me in a big way. The idea that your app logic, 
-            database, storage, and cache all live as close to the user as possible — and that 
-            <strong>NuxtHub</strong> makes that surprisingly approachable — is what keeps me building.
-          </p>
-          <p>
-            Still learning. Always shipping. If something doesn't work, I enjoy figuring out why.
-          </p>
-        </div>
-      </section>
-
-      <hr class="divider" />
-
-      <!-- Contact -->
-      <section id="contact" aria-labelledby="contact-heading">
-        <p class="section-label">// contact</p>
-        <h2 class="section-title" id="contact-heading">Say hello</h2>
-
-        <div class="contact-box">
-          <h3>Let's connect</h3>
-          <p>I'm always up for talking Nuxt, Cloudflare, or just web dev in general.</p>
-          <div class="contact-links">
-            <a href="https://github.com/zeenivp" class="contact-link" target="_blank" rel="noopener noreferrer">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-              GitHub
+            <a href="#contact"
+                class="bg-violet-600 hover:bg-violet-500 transition-colors px-5 py-2 rounded-full text-sm font-bold text-white">
+                Hire Me
             </a>
-            <a href="https://x.com/zeenivp" class="contact-link" target="_blank" rel="noopener noreferrer">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-              X / Twitter
-            </a>
-          </div>
         </div>
-      </section>
-    </div>
-  </main>
+    </nav>
 
-  <!-- Footer -->
-  <footer>
-    <div class="wrapper">
-      <span class="footer-text">
-        &copy; 2026 <a href="/">zeeni</a> — built with ☁️ &amp; Cloudflare
-      </span>
-      <span class="footer-text" style="color: var(--border);">
-        <!-- powered by curiosity -->
-      </span>
-    </div>
-  </footer>
+    <!-- ── HERO ── -->
+    <section id="hero" class="min-h-screen flex flex-col justify-center px-6 pt-24 pb-10 relative overflow-hidden">
+
+        <!-- Blob -->
+        <div class="absolute w-96 h-96 rounded-full bg-slate-800/50 blur-3xl top-0 left-0 pointer-events-none"></div>
+
+        <!-- Two col layout -->
+        <div class="max-w-5xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center">
+
+            <!-- LEFT: text -->
+            <div>
+                <span
+                    class="inline-flex items-center gap-2 mb-5 px-4 py-1.5 rounded-full border border-violet-500/30 bg-slate-800 text-violet-300 text-xs font-bold uppercase tracking-widest">
+                    <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-ping"></span>
+                    Available for work
+                </span>
+
+                <h1 class="text-5xl md:text-6xl font-black leading-tight mb-3 text-white">
+                    Hafiza<br />
+                    <span
+                        class="bg-gradient-to-r from-violet-400 to-violet-600 bg-clip-text text-transparent">Zeenat</span>
+                </h1>
+
+                <p class="text-slate-300 text-base font-medium leading-relaxed mb-8 max-w-sm">
+                    Full-Stack Web Developer crafting fast, modern & type-safe web apps with the Nuxt ecosystem.
+                </p>
+
+                <a href="#contact"
+                    class="bg-violet-600 hover:bg-violet-500 transition-colors px-7 py-3 rounded-full font-bold text-white text-sm inline-block shadow-lg shadow-violet-900/30">
+                    Let's Talk →
+                </a>
+            </div>
+
+            <!-- RIGHT: avatar -->
+            <div class="flex justify-center md:justify-end">
+                <div class="relative">
+                    <div class="absolute inset-0 rounded-full bg-slate-700/30 blur-2xl"></div>
+                    <div
+                        class="relative w-64 h-64 md:w-72 md:h-72 rounded-full flex items-center justify-center border-4 border-violet-700/40 bg-slate-800">
+                        <span
+                            class="text-7xl font-black bg-gradient-to-r from-violet-400 to-violet-600 bg-clip-text text-transparent select-none">HZ</span>
+                    </div>
+                    <span
+                        class="absolute bottom-4 right-4 w-6 h-6 rounded-full bg-green-400 border-4 border-slate-900"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOOLS -->
+        <div class="max-w-5xl mx-auto w-full mt-14">
+            <p class="text-slate-500 text-xs uppercase tracking-widest font-semibold mb-4">Tools I work with</p>
+
+            <!-- Row 1 -->
+            <div class="flex flex-wrap gap-3 mb-3">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-800 hover:border-violet-500/50 transition-colors cursor-default">
+                    <svg width="22" height="22" viewBox="0 0 400 400" fill="none">
+                        <path
+                            d="M220.2 340H373c3.6 0 7-1 9.9-2.7 2.9-1.8 5.3-4.3 6.9-7.3a18 18 0 000-17.9L280.5 129c-1.6-3-4-5.5-6.9-7.3a18 18 0 00-19.8 0c-2.9 1.8-5.3 4.3-6.9 7.3l-26.7 47.3-50.2-89.3c-1.6-3-4-5.5-6.9-7.3a18 18 0 00-19.8 0c-2.9 1.8-5.3 4.3-7 7.3L10.2 312.1A18 18 0 0010 330c1.6 3 4 5.5 6.9 7.3A18 18 0 0026.8 340h109.8c14.9 0 29-7.3 37.3-19.4l53.2-87.3 46 79.9-26.8 46.8h-26.1zm-87.3 0H26.8l109.7-190 55 95.3-31.1 53.8A44 44 0 01132.9 340zm167.3-129.4l55.1 95.4H245.1l55.1-95.4z"
+                            fill="#00DC82" />
+                    </svg>
+                    <span class="text-sm font-semibold text-slate-200">Nuxt</span>
+                </div>
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-800 hover:border-violet-500/50 transition-colors cursor-default">
+                    <svg width="22" height="22" viewBox="0 0 400 400" fill="none">
+                        <path
+                            d="M220.2 340H373c3.6 0 7-1 9.9-2.7 2.9-1.8 5.3-4.3 6.9-7.3a18 18 0 000-17.9L280.5 129c-1.6-3-4-5.5-6.9-7.3a18 18 0 00-19.8 0c-2.9 1.8-5.3 4.3-6.9 7.3l-26.7 47.3-50.2-89.3c-1.6-3-4-5.5-6.9-7.3a18 18 0 00-19.8 0c-2.9 1.8-5.3 4.3-7 7.3L10.2 312.1A18 18 0 0010 330c1.6 3 4 5.5 6.9 7.3A18 18 0 0026.8 340h109.8c14.9 0 29-7.3 37.3-19.4l53.2-87.3 46 79.9-26.8 46.8h-26.1zm-87.3 0H26.8l109.7-190 55 95.3-31.1 53.8A44 44 0 01132.9 340zm167.3-129.4l55.1 95.4H245.1l55.1-95.4z"
+                            fill="#00DC82" />
+                    </svg>
+                    <span class="text-sm font-semibold text-slate-200">Nuxt UI</span>
+                </div>
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-800 hover:border-violet-500/50 transition-colors cursor-default">
+                    <svg width="22" height="22" viewBox="0 0 100 100">
+                        <rect width="100" height="100" rx="16" fill="#00DC82" /><text x="50" y="67" font-size="50"
+                            font-weight="900" text-anchor="middle" fill="#0a0a0a" font-family="system-ui">H</text>
+                    </svg>
+                    <span class="text-sm font-semibold text-slate-200">NuxtHub</span>
+                </div>
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-800 hover:border-violet-500/50 transition-colors cursor-default">
+                    <svg width="22" height="20" viewBox="0 0 261.76 226.69">
+                        <path d="M161.1.001l-30.224 52.35L100.647.001H0l130.872 226.69L261.76.001z" fill="#41b883" />
+                        <path d="M161.1.001l-30.224 52.35L100.647.001H52.346l78.526 136.01L209.4.001z" fill="#34495e" />
+                    </svg>
+                    <span class="text-sm font-semibold text-slate-200">Vue.js</span>
+                </div>
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-800 hover:border-violet-500/50 transition-colors cursor-default">
+                    <svg width="22" height="22" viewBox="0 0 400 400">
+                        <rect width="400" height="400" rx="40" fill="#3178c6" />
+                        <path fill="#fff"
+                            d="M219 291c6 3 16 7 26 7 10 0 17-4 17-12 0-7-5-11-17-15-17-6-28-15-28-29 0-17 14-29 36-29 11 0 20 2 26 5l-5 18c-4-2-12-5-21-5-10 0-15 4-15 10 0 7 5 10 18 15 18 7 27 16 27 30 0 17-13 30-38 30-11 0-22-3-28-7l2-18z" />
+                    </svg>
+                    <span class="text-sm font-semibold text-slate-200">TypeScript</span>
+                </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="flex flex-wrap gap-3">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-800 hover:border-violet-500/50 transition-colors cursor-default">
+                    <svg width="22" height="22" viewBox="0 0 100 100">
+                        <rect width="100" height="100" rx="16" fill="#c5f74f" />
+                        <path d="M18 30 Q50 16 82 30" stroke="#111" stroke-width="8" fill="none"
+                            stroke-linecap="round" />
+                        <path d="M18 50 Q50 36 82 50" stroke="#111" stroke-width="8" fill="none"
+                            stroke-linecap="round" />
+                        <path d="M18 70 Q50 56 82 70" stroke="#111" stroke-width="8" fill="none"
+                            stroke-linecap="round" />
+                    </svg>
+                    <span class="text-sm font-semibold text-slate-200">Drizzle ORM</span>
+                </div>
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-800 hover:border-violet-500/50 transition-colors cursor-default">
+                    <svg width="22" height="22" viewBox="0 0 100 100">
+                        <rect width="100" height="100" rx="16" fill="#D97757" /><text x="50" y="66" font-size="46"
+                            font-weight="900" text-anchor="middle" fill="#fff" font-family="system-ui">C</text>
+                    </svg>
+                    <span class="text-sm font-semibold text-slate-200">Claude</span>
+                </div>
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-800 hover:border-violet-500/50 transition-colors cursor-default">
+                    <svg width="22" height="22" viewBox="0 0 256 289">
+                        <path d="M128 0L0 72v145l128 72 128-72V72z" fill="#539E43" />
+                        <path d="M128 38L46 85v95l82 47 82-47V85z" fill="#3d7a34" />
+                        <path
+                            d="M157 166c-3 5-9 9-16 9-10 0-19-8-19-19s9-19 19-19c7 0 13 4 16 9l18-11c-6-11-19-19-34-19-21 0-38 17-38 38s17 38 38 38c15 0 28-8 34-19z"
+                            fill="#fff" />
+                    </svg>
+                    <span class="text-sm font-semibold text-slate-200">Node.js</span>
+                </div>
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-800 hover:border-violet-500/50 transition-colors cursor-default">
+                    <svg width="22" height="22" viewBox="0 0 400 400" fill="none">
+                        <path
+                            d="M220.2 340H373c3.6 0 7-1 9.9-2.7 2.9-1.8 5.3-4.3 6.9-7.3a18 18 0 000-17.9L280.5 129c-1.6-3-4-5.5-6.9-7.3a18 18 0 00-19.8 0c-2.9 1.8-5.3 4.3-6.9 7.3l-26.7 47.3-50.2-89.3c-1.6-3-4-5.5-6.9-7.3a18 18 0 00-19.8 0c-2.9 1.8-5.3 4.3-7 7.3L10.2 312.1A18 18 0 0010 330c1.6 3 4 5.5 6.9 7.3A18 18 0 0026.8 340h109.8c14.9 0 29-7.3 37.3-19.4l53.2-87.3 46 79.9-26.8 46.8h-26.1zm-87.3 0H26.8l109.7-190 55 95.3-31.1 53.8A44 44 0 01132.9 340zm167.3-129.4l55.1 95.4H245.1l55.1-95.4z"
+                            fill="#00DC82" />
+                    </svg>
+                    <span class="text-sm font-semibold text-slate-200">Nuxt.js</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── ABOUT ── -->
+    <section id="about" class="py-20 px-6 bg-slate-800/40">
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-14 items-center">
+
+            <!-- Left -->
+            <div>
+                <span
+                    class="inline-block mb-4 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest border border-violet-500/30 bg-slate-800 text-violet-300">
+                    Who I Am
+                </span>
+                <h2 class="text-3xl md:text-4xl font-black mb-5 text-white">
+                    About <span
+                        class="bg-gradient-to-r from-violet-400 to-violet-600 bg-clip-text text-transparent">Me</span>
+                </h2>
+                <p class="text-slate-400 leading-relaxed mb-4">
+                    Hey! I'm <strong class="text-white">Hafiza Zeenat</strong> — a passionate full-stack web developer
+                    who loves building clean, fast and user-friendly applications.
+                </p>
+                <p class="text-slate-400 leading-relaxed mb-8">
+                    I specialise in the <span class="text-violet-300 font-medium">Nuxt</span> ecosystem and enjoy
+                    turning ideas into real products — from polished UIs to solid backends with <span
+                        class="text-violet-300 font-medium">Drizzle ORM</span> & <span
+                        class="text-violet-300 font-medium">NuxtHub</span>.
+                </p>
+                <div class="flex gap-6">
+                    <div class="text-center">
+                        <p
+                            class="text-3xl font-black bg-gradient-to-r from-violet-400 to-violet-600 bg-clip-text text-transparent leading-none">
+                            6+</p>
+                        <p class="text-xs text-slate-500 mt-1.5 font-medium">Months Exp.</p>
+                    </div>
+                    <div class="w-px bg-slate-700"></div>
+                    <div class="text-center">
+                        <p
+                            class="text-3xl font-black bg-gradient-to-r from-violet-400 to-violet-600 bg-clip-text text-transparent leading-none">
+                            1</p>
+                        <p class="text-xs text-slate-500 mt-1.5 font-medium">Projects</p>
+                    </div>
+                    <div class="w-px bg-slate-700"></div>
+                    <div class="text-center">
+                        <p
+                            class="text-3xl font-black bg-gradient-to-r from-violet-400 to-violet-600 bg-clip-text text-transparent leading-none">
+                            100%</p>
+                        <p class="text-xs text-slate-500 mt-1.5 font-medium">Dedication</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: info cards -->
+            <div class="flex flex-col gap-4">
+                <div class="bg-slate-900 rounded-2xl p-5 border border-slate-700 flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-slate-700/50 flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-white font-semibold text-sm mb-1">Full-Stack Development</p>
+                        <p class="text-slate-500 text-xs leading-relaxed">Building end-to-end apps with Nuxt, Vue &
+                            TypeScript.</p>
+                    </div>
+                </div>
+                <div class="bg-slate-900 rounded-2xl p-5 border border-slate-700 flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-slate-700/50 flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-white font-semibold text-sm mb-1">Database & Backend</p>
+                        <p class="text-slate-500 text-xs leading-relaxed">Type-safe databases with Drizzle ORM &
+                            NuxtHub.</p>
+                    </div>
+                </div>
+                <div class="bg-slate-900 rounded-2xl p-5 border border-slate-700 flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-slate-700/50 flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-white font-semibold text-sm mb-1">AI Integration</p>
+                        <p class="text-slate-500 text-xs leading-relaxed">Integrating Claude API to build smart
+                            features.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ── STACK ── -->
+    <section id="stack" class="py-20 px-6">
+        <div class="max-w-5xl mx-auto">
+            <span class="block text-center mb-2 text-xs font-bold uppercase tracking-widest text-violet-400">What I
+                Use</span>
+            <h2 class="text-3xl md:text-4xl font-black text-center mb-12 text-white">
+                My <span class="bg-gradient-to-r from-violet-400 to-violet-600 bg-clip-text text-transparent">Tech
+                    Stack</span>
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-5">
+
+                <!-- Frontend -->
+                <div
+                    class="bg-slate-800 rounded-2xl p-6 border border-slate-700 hover:border-violet-500/40 transition-colors">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-slate-700 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <h3 class="font-bold text-white text-base">Frontend</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div
+                            class="flex items-center gap-3 py-2 px-3 rounded-xl bg-slate-900 border border-slate-700/50">
+                            <svg width="16" height="16" viewBox="0 0 400 400" fill="none">
+                                <path
+                                    d="M220.2 340H373c3.6 0 7-1 9.9-2.7 2.9-1.8 5.3-4.3 6.9-7.3a18 18 0 000-17.9L280.5 129c-1.6-3-4-5.5-6.9-7.3a18 18 0 00-19.8 0c-2.9 1.8-5.3 4.3-6.9 7.3l-26.7 47.3-50.2-89.3c-1.6-3-4-5.5-6.9-7.3a18 18 0 00-19.8 0c-2.9 1.8-5.3 4.3-7 7.3L10.2 312.1A18 18 0 0010 330c1.6 3 4 5.5 6.9 7.3A18 18 0 0026.8 340h109.8c14.9 0 29-7.3 37.3-19.4l53.2-87.3 46 79.9-26.8 46.8h-26.1zm-87.3 0H26.8l109.7-190 55 95.3-31.1 53.8A44 44 0 01132.9 340zm167.3-129.4l55.1 95.4H245.1l55.1-95.4z"
+                                    fill="#00DC82" />
+                            </svg>
+                            <span class="text-sm text-slate-300 font-medium">Nuxt / Nuxt UI</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-3 py-2 px-3 rounded-xl bg-slate-900 border border-slate-700/50">
+                            <svg width="16" height="14" viewBox="0 0 261.76 226.69">
+                                <path d="M161.1.001l-30.224 52.35L100.647.001H0l130.872 226.69L261.76.001z"
+                                    fill="#41b883" />
+                                <path d="M161.1.001l-30.224 52.35L100.647.001H52.346l78.526 136.01L209.4.001z"
+                                    fill="#34495e" />
+                            </svg>
+                            <span class="text-sm text-slate-300 font-medium">Vue.js</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-3 py-2 px-3 rounded-xl bg-slate-900 border border-slate-700/50">
+                            <svg width="16" height="16" viewBox="0 0 400 400">
+                                <rect width="400" height="400" rx="40" fill="#3178c6" />
+                                <path fill="#fff"
+                                    d="M219 291c6 3 16 7 26 7 10 0 17-4 17-12 0-7-5-11-17-15-17-6-28-15-28-29 0-17 14-29 36-29 11 0 20 2 26 5l-5 18c-4-2-12-5-21-5-10 0-15 4-15 10 0 7 5 10 18 15 18 7 27 16 27 30 0 17-13 30-38 30-11 0-22-3-28-7l2-18z" />
+                            </svg>
+                            <span class="text-sm text-slate-300 font-medium">TypeScript</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-3 py-2 px-3 rounded-xl bg-slate-900 border border-slate-700/50">
+                            <span class="text-slate-500 text-xs font-mono font-bold">&lt;/&gt;</span>
+                            <span class="text-sm text-slate-300 font-medium">HTML / CSS / Tailwind</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backend -->
+                <div
+                    class="bg-slate-800 rounded-2xl p-6 border border-slate-700 hover:border-violet-500/40 transition-colors">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-slate-700 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2" />
+                            </svg>
+                        </div>
+                        <h3 class="font-bold text-white text-base">Backend & Data</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div
+                            class="flex items-center gap-3 py-2 px-3 rounded-xl bg-slate-900 border border-slate-700/50">
+                            <svg width="16" height="16" viewBox="0 0 100 100">
+                                <rect width="100" height="100" rx="16" fill="#00DC82" /><text x="50" y="67"
+                                    font-size="50" font-weight="900" text-anchor="middle" fill="#0a0a0a"
+                                    font-family="system-ui">H</text>
+                            </svg>
+                            <span class="text-sm text-slate-300 font-medium">NuxtHub</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-3 py-2 px-3 rounded-xl bg-slate-900 border border-slate-700/50">
+                            <svg width="16" height="16" viewBox="0 0 100 100">
+                                <rect width="100" height="100" rx="16" fill="#c5f74f" />
+                                <path d="M18 30 Q50 16 82 30" stroke="#111" stroke-width="8" fill="none"
+                                    stroke-linecap="round" />
+                                <path d="M18 50 Q50 36 82 50" stroke="#111" stroke-width="8" fill="none"
+                                    stroke-linecap="round" />
+                                <path d="M18 70 Q50 56 82 70" stroke="#111" stroke-width="8" fill="none"
+                                    stroke-linecap="round" />
+                            </svg>
+                            <span class="text-sm text-slate-300 font-medium">Drizzle ORM</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-3 py-2 px-3 rounded-xl bg-slate-900 border border-slate-700/50">
+                            <svg width="16" height="16" viewBox="0 0 256 289">
+                                <path d="M128 0L0 72v145l128 72 128-72V72z" fill="#539E43" />
+                                <path
+                                    d="M157 166c-3 5-9 9-16 9-10 0-19-8-19-19s9-19 19-19c7 0 13 4 16 9l18-11c-6-11-19-19-34-19-21 0-38 17-38 38s17 38 38 38c15 0 28-8 34-19z"
+                                    fill="#fff" />
+                            </svg>
+                            <span class="text-sm text-slate-300 font-medium">Node.js</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-3 py-2 px-3 rounded-xl bg-slate-900 border border-slate-700/50">
+                            <span class="text-slate-500 text-xs">🗄️</span>
+                            <span class="text-sm text-slate-300 font-medium">SQLite / D1 / REST APIs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI & Tools -->
+                <div
+                    class="bg-slate-800 rounded-2xl p-6 border border-slate-700 hover:border-violet-500/40 transition-colors">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-slate-700 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                        <h3 class="font-bold text-white text-base">AI & Tooling</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div
+                            class="flex items-center gap-3 py-2 px-3 rounded-xl bg-slate-900 border border-slate-700/50">
+                            <svg width="16" height="16" viewBox="0 0 100 100">
+                                <rect width="100" height="100" rx="16" fill="#D97757" /><text x="50" y="66"
+                                    font-size="46" font-weight="900" text-anchor="middle" fill="#fff"
+                                    font-family="system-ui">C</text>
+                            </svg>
+                            <span class="text-sm text-slate-300 font-medium">Claude API</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-3 py-2 px-3 rounded-xl bg-slate-900 border border-slate-700/50">
+                            <svg width="16" height="16" viewBox="0 0 92 92">
+                                <path fill="#f05032"
+                                    d="M90.156 41.965L50.036 1.849a5.918 5.918 0 00-8.372 0l-8.328 8.332 10.566 10.566a7.03 7.03 0 017.23 1.684 7.04 7.04 0 011.673 7.277l10.183 10.183a7.04 7.04 0 010 9.951 7.045 7.045 0 01-9.951 0 7.04 7.04 0 01-1.555-7.637L49.63 33.213v26.21a7.04 7.04 0 010 9.951 7.045 7.045 0 01-9.951 0 7.04 7.04 0 010-9.951 7.05 7.05 0 012.28-1.528V33.029a7.07 7.07 0 01-2.28-1.527 7.047 7.047 0 01-1.534-7.68L29.769 13.257 1.845 41.176a5.918 5.918 0 000 8.372l40.12 40.116a5.918 5.918 0 008.372 0l39.82-39.82a5.918 5.918 0 000-8.879" />
+                            </svg>
+                            <span class="text-sm text-slate-300 font-medium">Git / GitHub</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-3 py-2 px-3 rounded-xl bg-slate-900 border border-slate-700/50">
+                            <span class="text-slate-500 text-xs">☁️</span>
+                            <span class="text-sm text-slate-300 font-medium">Cloudflare / Vercel</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-3 py-2 px-3 rounded-xl bg-slate-900 border border-slate-700/50">
+                            <span class="text-slate-500 text-xs">⚡</span>
+                            <span class="text-sm text-slate-300 font-medium">Vite / Vercel AI SDK</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ── PROJECTS ── -->
+    <section id="projects" class="py-20 px-6 bg-slate-800/40">
+        <div class="max-w-5xl mx-auto">
+            <span class="block text-center mb-2 text-xs font-bold uppercase tracking-widest text-violet-400">My
+                Work</span>
+            <h2 class="text-3xl md:text-4xl font-black text-center mb-12 text-white">
+                My <span
+                    class="bg-gradient-to-r from-violet-400 to-violet-600 bg-clip-text text-transparent">Portfolio</span>
+            </h2>
+
+            <div
+                class="group max-w-3xl mx-auto bg-slate-900 rounded-3xl overflow-hidden border border-slate-700 hover:border-violet-500/40 transition-all duration-300 hover:shadow-2xl hover:shadow-violet-900/20">
+                <div class="grid md:grid-cols-2">
+                    <div
+                        class="h-56 md:h-auto flex items-center justify-center relative overflow-hidden bg-slate-800">
+                        <span
+                            class="text-8xl group-hover:scale-110 transition-transform duration-500 select-none">💼</span>
+                        <span
+                            class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold bg-violet-600 text-white">Live</span>
+                    </div>
+                    <div class="p-8 flex flex-col justify-center">
+                        <h3 class="font-black text-white text-2xl mb-3">Portfolio Website</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-5">
+                            My personal developer portfolio — built with plain HTML & Tailwind CSS v4. Clean design,
+                            smooth animations and fully responsive.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span
+                                class="text-xs px-2.5 py-1 rounded-lg bg-slate-700/50 text-violet-300 font-semibold border border-violet-500/20">HTML</span>
+                            <span
+                                class="text-xs px-2.5 py-1 rounded-lg bg-slate-700/50 text-violet-300 font-semibold border border-violet-500/20">Tailwind
+                                v4</span>
+                            <span
+                                class="text-xs px-2.5 py-1 rounded-lg bg-slate-700/50 text-violet-300 font-semibold border border-violet-500/20">Responsive</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="#"
+                                class="px-5 py-2.5 rounded-xl text-sm font-bold bg-violet-600 hover:bg-violet-500 text-white transition-colors">Live
+                                Demo →</a>
+                            <a href="#"
+                                class="px-5 py-2.5 rounded-xl text-sm font-bold border border-slate-600 text-slate-400 hover:text-white hover:border-violet-500/50 transition-colors">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ── CONTACT ── -->
+    <section id="contact" class="py-20 px-6">
+        <div class="max-w-md mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-black mb-3 text-white">
+                Let's <span class="bg-gradient-to-r from-violet-400 to-violet-600 bg-clip-text text-transparent">Work
+                    Together</span>
+            </h2>
+            <p class="text-slate-400 text-sm mb-8">Have a project? Send me a message.</p>
+
+            <div class="bg-slate-800 rounded-2xl p-7 border border-slate-700 text-left">
+                <div class="space-y-4">
+                    <div>
+                        <label
+                            class="block text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-wider">Name</label>
+                        <input type="text" placeholder="Your name"
+                            class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-violet-500/40 focus:border-violet-500/50 transition text-sm" />
+                    </div>
+                    <div>
+                        <label
+                            class="block text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-wider">Email</label>
+                        <input type="email" placeholder="your@email.com"
+                            class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-violet-500/40 focus:border-violet-500/50 transition text-sm" />
+                    </div>
+                    <div>
+                        <label
+                            class="block text-xs font-bold text-slate-400 mb-1.5 uppercase tracking-wider">Message</label>
+                        <textarea rows="4" placeholder="Tell me about your project..."
+                            class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-violet-500/40 focus:border-violet-500/50 transition resize-none text-sm"></textarea>
+                    </div>
+                    <button
+                        class="bg-violet-600 hover:bg-violet-500 transition-colors w-full py-3 rounded-xl font-bold text-white text-sm">
+                        Send Message 🚀
+                    </button>
+                </div>
+            </div>
+
+            <!-- Social row -->
+            <div class="flex justify-center items-center gap-3 mt-7 flex-wrap">
+                <a href="https://wa.me/HafizaZeenat" aria-label="WhatsApp"
+                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-slate-700 text-slate-400 hover:text-white hover:border-green-500/50 hover:bg-green-500/10 transition-colors text-xs font-semibold">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#25D366">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                        <path
+                            d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.534 5.86L.057 23.882a.75.75 0 00.918.937l6.18-1.62A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.7-.52-5.23-1.424l-.373-.222-3.872 1.016 1.035-3.77-.243-.386A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
+                    </svg>
+                    HafizaZeenat
+                </a>
+                <a href="mailto:zeenivp@gmail.com" aria-label="Email"
+                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-slate-700 text-slate-400 hover:text-white hover:border-violet-500/50 hover:bg-slate-800 transition-colors text-xs font-semibold">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    zeenivp@gmail.com
+                </a>
+                <a href="#" aria-label="GitHub"
+                    class="w-10 h-10 rounded-full border border-slate-700 flex items-center justify-center text-slate-500 hover:text-violet-400 hover:border-violet-500/50 transition-colors">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer class="py-6 border-t border-slate-700/50 text-center text-slate-600 text-xs bg-slate-900">
+        Crafted with 💜 by
+        <span class="bg-gradient-to-r from-violet-400 to-violet-600 bg-clip-text text-transparent font-bold">Hafiza
+            Zeenat</span>
+    </footer>
 
 </body>
+
 </html>
