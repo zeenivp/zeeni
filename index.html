@@ -35,16 +35,16 @@
     </nav>
 
     <!-- ── HERO ── -->
-    <section id="hero" class="min-h-screen flex flex-col justify-center px-6 pt-24 pb-10 relative overflow-hidden">
+    <section id="hero" class="min-h-screen flex flex-col justify-center px-6 pt-36 pb-10 relative overflow-hidden">
 
         <!-- Blob -->
         <div class="absolute w-96 h-96 rounded-full bg-indigo-900/30 blur-3xl top-0 left-0 pointer-events-none"></div>
 
         <!-- Two col layout -->
-        <div class="max-w-5xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center">
+        <div class="max-w-5xl mx-auto w-full grid md:grid-cols-2 gap-12 items-start">
 
             <!-- LEFT: text -->
-            <div>
+            <div class="-mt-10">
                 <span
                     class="inline-flex items-center gap-2 mb-5 px-4 py-1.5 rounded-full border border-indigo-500/30 bg-slate-900 text-cyan-300 text-xs font-bold uppercase tracking-widest">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
@@ -69,113 +69,113 @@
 
             <!-- RIGHT: avatar -->
             <div class="flex justify-center md:justify-end">
-                <div class="relative">
+                <div class="relative mt-0">
                     <div class="absolute inset-0 rounded-full bg-indigo-900/30 blur-2xl"></div>
                     <div
                         class="relative w-64 h-64 md:w-72 md:h-72 rounded-2xl border-4 border-indigo-600/40 overflow-hidden bg-slate-900">
                         <img src="pic.jpeg" alt="Hafiza Zeenat"
                             class="w-full h-full object-cover brightness-125 contrast-105"
-                            style="object-position: 60% 20%;" />
+                            style="object-position: 35% 5%;" />
                     </div>
                     <span
                         class="absolute bottom-4 right-4 w-6 h-6 rounded-full bg-emerald-400 border-4 border-slate-950"></span>
                 </div>
             </div>
-        </div>
 
-        <!-- TOOLS -->
-        <div class="max-w-5xl mx-auto w-full mt-14">
-            <p class="text-slate-500 text-xs uppercase tracking-widest font-semibold mb-4">Tools I work with</p>
 
-            <!-- Row 1 -->
-            <div class="flex flex-wrap gap-3 mb-3">
-                <div
-                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-800 bg-slate-900 hover:border-indigo-500/50 transition-colors cursor-default">
-                    <svg width="22" height="22" viewBox="0 0 400 400" fill="none">
-                        <path
-                            d="M220.2 340H373c3.6 0 7-1 9.9-2.7 2.9-1.8 5.3-4.3 6.9-7.3a18 18 0 000-17.9L280.5 129c-1.6-3-4-5.5-6.9-7.3a18 18 0 00-19.8 0c-2.9 1.8-5.3 4.3-6.9 7.3l-26.7 47.3-50.2-89.3c-1.6-3-4-5.5-6.9-7.3a18 18 0 00-19.8 0c-2.9 1.8-5.3 4.3-7 7.3L10.2 312.1A18 18 0 0010 330c1.6 3 4 5.5 6.9 7.3A18 18 0 0026.8 340h109.8c14.9 0 29-7.3 37.3-19.4l53.2-87.3 46 79.9-26.8 46.8h-26.1zm-87.3 0H26.8l109.7-190 55 95.3-31.1 53.8A44 44 0 01132.9 340zm167.3-129.4l55.1 95.4H245.1l55.1-95.4z"
-                            fill="#00DC82" />
-                    </svg>
-                    <span class="text-sm font-semibold text-slate-200">Nuxt</span>
+            <!-- TOOLS full-width -->
+            <div class="max-w-5xl mx-auto w-full mt-14">
+                <p class="text-slate-500 text-xs uppercase tracking-widest font-semibold mb-4">Tools I work with</p>
+                <div class="flex flex-wrap gap-3 mb-3">
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-800 bg-slate-900 hover:border-indigo-500/50 transition-colors cursor-default text-sm font-semibold text-slate-200">
+                        <svg width="22" height="22" viewBox="0 0 400 400" fill="none">
+                            <path
+                                d="M220.2 340H373c3.6 0 7-1 9.9-2.7 2.9-1.8 5.3-4.3 6.9-7.3a18 18 0 000-17.9L280.5 129c-1.6-3-4-5.5-6.9-7.3a18 18 0 00-19.8 0c-2.9 1.8-5.3 4.3-6.9 7.3l-26.7 47.3-50.2-89.3c-1.6-3-4-5.5-6.9-7.3a18 18 0 00-19.8 0c-2.9 1.8-5.3 4.3-7 7.3L10.2 312.1A18 18 0 0010 330c1.6 3 4 5.5 6.9 7.3A18 18 0 0026.8 340h109.8c14.9 0 29-7.3 37.3-19.4l53.2-87.3 46 79.9-26.8 46.8h-26.1zm-87.3 0H26.8l109.7-190 55 95.3-31.1 53.8A44 44 0 01132.9 340zm167.3-129.4l55.1 95.4H245.1l55.1-95.4z"
+                                fill="#00DC82" />
+                        </svg> Nuxt
+                    </div>
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-800 bg-slate-900 hover:border-indigo-500/50 transition-colors cursor-default text-sm font-semibold text-slate-200">
+                        <svg width="22" height="22" viewBox="0 0 400 400" fill="none">
+                            <path
+                                d="M220.2 340H373c3.6 0 7-1 9.9-2.7 2.9-1.8 5.3-4.3 6.9-7.3a18 18 0 000-17.9L280.5 129c-1.6-3-4-5.5-6.9-7.3a18 18 0 00-19.8 0c-2.9 1.8-5.3 4.3-6.9 7.3l-26.7 47.3-50.2-89.3c-1.6-3-4-5.5-6.9-7.3a18 18 0 00-19.8 0c-2.9 1.8-5.3 4.3-7 7.3L10.2 312.1A18 18 0 0010 330c1.6 3 4 5.5 6.9 7.3A18 18 0 0026.8 340h109.8c14.9 0 29-7.3 37.3-19.4l53.2-87.3 46 79.9-26.8 46.8h-26.1zm-87.3 0H26.8l109.7-190 55 95.3-31.1 53.8A44 44 0 01132.9 340zm167.3-129.4l55.1 95.4H245.1l55.1-95.4z"
+                                fill="#00DC82" />
+                        </svg> Nuxt UI
+                    </div>
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-800 bg-slate-900 hover:border-indigo-500/50 transition-colors cursor-default text-sm font-semibold text-slate-200">
+                        <svg width="22" height="22" viewBox="0 0 100 100">
+                            <rect width="100" height="100" rx="16" fill="#00DC82" /><text x="50" y="67" font-size="50"
+                                font-weight="900" text-anchor="middle" fill="#0a0a0a" font-family="system-ui">H</text>
+                        </svg> NuxtHub
+                    </div>
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-800 bg-slate-900 hover:border-indigo-500/50 transition-colors cursor-default text-sm font-semibold text-slate-200">
+                        <svg width="22" height="20" viewBox="0 0 261.76 226.69">
+                            <path d="M161.1.001l-30.224 52.35L100.647.001H0l130.872 226.69L261.76.001z"
+                                fill="#41b883" />
+                            <path d="M161.1.001l-30.224 52.35L100.647.001H52.346l78.526 136.01L209.4.001z"
+                                fill="#34495e" />
+                        </svg> Vue.js
+                    </div>
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-800 bg-slate-900 hover:border-indigo-500/50 transition-colors cursor-default text-sm font-semibold text-slate-200">
+                        <svg width="22" height="22" viewBox="0 0 400 400">
+                            <rect width="400" height="400" rx="40" fill="#3178c6" />
+                            <path fill="#fff"
+                                d="M219 291c6 3 16 7 26 7 10 0 17-4 17-12 0-7-5-11-17-15-17-6-28-15-28-29 0-17 14-29 36-29 11 0 20 2 26 5l-5 18c-4-2-12-5-21-5-10 0-15 4-15 10 0 7 5 10 18 15 18 7 27 16 27 30 0 17-13 30-38 30-11 0-22-3-28-7l2-18z" />
+                        </svg> TypeScript
+                    </div>
                 </div>
-                <div
-                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-800 bg-slate-900 hover:border-indigo-500/50 transition-colors cursor-default">
-                    <svg width="22" height="22" viewBox="0 0 400 400" fill="none">
-                        <path
-                            d="M220.2 340H373c3.6 0 7-1 9.9-2.7 2.9-1.8 5.3-4.3 6.9-7.3a18 18 0 000-17.9L280.5 129c-1.6-3-4-5.5-6.9-7.3a18 18 0 00-19.8 0c-2.9 1.8-5.3 4.3-6.9 7.3l-26.7 47.3-50.2-89.3c-1.6-3-4-5.5-6.9-7.3a18 18 0 00-19.8 0c-2.9 1.8-5.3 4.3-7 7.3L10.2 312.1A18 18 0 0010 330c1.6 3 4 5.5 6.9 7.3A18 18 0 0026.8 340h109.8c14.9 0 29-7.3 37.3-19.4l53.2-87.3 46 79.9-26.8 46.8h-26.1zm-87.3 0H26.8l109.7-190 55 95.3-31.1 53.8A44 44 0 01132.9 340zm167.3-129.4l55.1 95.4H245.1l55.1-95.4z"
-                            fill="#00DC82" />
-                    </svg>
-                    <span class="text-sm font-semibold text-slate-200">Nuxt UI</span>
-                </div>
-                <div
-                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-800 bg-slate-900 hover:border-indigo-500/50 transition-colors cursor-default">
-                    <svg width="22" height="22" viewBox="0 0 100 100">
-                        <rect width="100" height="100" rx="16" fill="#00DC82" /><text x="50" y="67" font-size="50"
-                            font-weight="900" text-anchor="middle" fill="#0a0a0a" font-family="system-ui">H</text>
-                    </svg>
-                    <span class="text-sm font-semibold text-slate-200">NuxtHub</span>
-                </div>
-                <div
-                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-800 bg-slate-900 hover:border-indigo-500/50 transition-colors cursor-default">
-                    <svg width="22" height="20" viewBox="0 0 261.76 226.69">
-                        <path d="M161.1.001l-30.224 52.35L100.647.001H0l130.872 226.69L261.76.001z" fill="#41b883" />
-                        <path d="M161.1.001l-30.224 52.35L100.647.001H52.346l78.526 136.01L209.4.001z" fill="#34495e" />
-                    </svg>
-                    <span class="text-sm font-semibold text-slate-200">Vue.js</span>
-                </div>
-                <div
-                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-800 bg-slate-900 hover:border-indigo-500/50 transition-colors cursor-default">
-                    <svg width="22" height="22" viewBox="0 0 400 400">
-                        <rect width="400" height="400" rx="40" fill="#3178c6" />
-                        <path fill="#fff"
-                            d="M219 291c6 3 16 7 26 7 10 0 17-4 17-12 0-7-5-11-17-15-17-6-28-15-28-29 0-17 14-29 36-29 11 0 20 2 26 5l-5 18c-4-2-12-5-21-5-10 0-15 4-15 10 0 7 5 10 18 15 18 7 27 16 27 30 0 17-13 30-38 30-11 0-22-3-28-7l2-18z" />
-                    </svg>
-                    <span class="text-sm font-semibold text-slate-200">TypeScript</span>
-                </div>
-            </div>
-
-            <!-- Row 2 -->
-            <div class="flex flex-wrap gap-3">
-                <div
-                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-800 bg-slate-900 hover:border-indigo-500/50 transition-colors cursor-default">
-                    <svg width="22" height="22" viewBox="0 0 100 100">
-                        <rect width="100" height="100" rx="16" fill="#c5f74f" />
-                        <path d="M18 30 Q50 16 82 30" stroke="#111" stroke-width="8" fill="none"
-                            stroke-linecap="round" />
-                        <path d="M18 50 Q50 36 82 50" stroke="#111" stroke-width="8" fill="none"
-                            stroke-linecap="round" />
-                        <path d="M18 70 Q50 56 82 70" stroke="#111" stroke-width="8" fill="none"
-                            stroke-linecap="round" />
-                    </svg>
-                    <span class="text-sm font-semibold text-slate-200">Drizzle ORM</span>
-                </div>
-                <div
-                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-800 bg-slate-900 hover:border-indigo-500/50 transition-colors cursor-default">
-                    <svg width="22" height="22" viewBox="0 0 100 100">
-                        <rect width="100" height="100" rx="16" fill="#D97757" /><text x="50" y="66" font-size="46"
-                            font-weight="900" text-anchor="middle" fill="#fff" font-family="system-ui">C</text>
-                    </svg>
-                    <span class="text-sm font-semibold text-slate-200">Claude</span>
-                </div>
-                <div
-                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-800 bg-slate-900 hover:border-indigo-500/50 transition-colors cursor-default">
-                    <svg width="22" height="22" viewBox="0 0 256 289">
-                        <path d="M128 0L0 72v145l128 72 128-72V72z" fill="#539E43" />
-                        <path d="M128 38L46 85v95l82 47 82-47V85z" fill="#3d7a34" />
-                        <path
-                            d="M157 166c-3 5-9 9-16 9-10 0-19-8-19-19s9-19 19-19c7 0 13 4 16 9l18-11c-6-11-19-19-34-19-21 0-38 17-38 38s17 38 38 38c15 0 28-8 34-19z"
-                            fill="#fff" />
-                    </svg>
-                    <span class="text-sm font-semibold text-slate-200">Node.js</span>
-                </div>
-                <div
-                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-800 bg-slate-900 hover:border-indigo-500/50 transition-colors cursor-default">
-                    <svg width="22" height="22" viewBox="0 0 400 400" fill="none">
-                        <path
-                            d="M220.2 340H373c3.6 0 7-1 9.9-2.7 2.9-1.8 5.3-4.3 6.9-7.3a18 18 0 000-17.9L280.5 129c-1.6-3-4-5.5-6.9-7.3a18 18 0 00-19.8 0c-2.9 1.8-5.3 4.3-6.9 7.3l-26.7 47.3-50.2-89.3c-1.6-3-4-5.5-6.9-7.3a18 18 0 00-19.8 0c-2.9 1.8-5.3 4.3-7 7.3L10.2 312.1A18 18 0 0010 330c1.6 3 4 5.5 6.9 7.3A18 18 0 0026.8 340h109.8c14.9 0 29-7.3 37.3-19.4l53.2-87.3 46 79.9-26.8 46.8h-26.1zm-87.3 0H26.8l109.7-190 55 95.3-31.1 53.8A44 44 0 01132.9 340zm167.3-129.4l55.1 95.4H245.1l55.1-95.4z"
-                            fill="#00DC82" />
-                    </svg>
-                    <span class="text-sm font-semibold text-slate-200">Nuxt.js</span>
+                <div class="flex flex-wrap gap-3">
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-800 bg-slate-900 hover:border-indigo-500/50 transition-colors cursor-default text-sm font-semibold text-slate-200">
+                        <svg width="22" height="22" viewBox="0 0 100 100">
+                            <rect width="100" height="100" rx="16" fill="#c5f74f" />
+                            <path d="M18 30 Q50 16 82 30" stroke="#111" stroke-width="8" fill="none"
+                                stroke-linecap="round" />
+                            <path d="M18 50 Q50 36 82 50" stroke="#111" stroke-width="8" fill="none"
+                                stroke-linecap="round" />
+                            <path d="M18 70 Q50 56 82 70" stroke="#111" stroke-width="8" fill="none"
+                                stroke-linecap="round" />
+                        </svg> Drizzle ORM
+                    </div>
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-800 bg-slate-900 hover:border-indigo-500/50 transition-colors cursor-default text-sm font-semibold text-slate-200">
+                        <svg width="22" height="22" viewBox="0 0 512 512">
+                            <path fill="#e44d26" d="M107.6 471l-33-370.8h362.8l-33 370.6L255.7 512z" />
+                            <path fill="#f16529" d="M256 480.5l120.9-33.5 28.2-316.3H256z" />
+                            <path fill="#ebebeb"
+                                d="M256 268.3h-60.1l-4.2-47.1H256v-46H144.5l1.1 12.2 11.2 125.5H256zm0 130.7l-.2.1-50.8-13.7-3.2-36.3h-46.1l6.4 71.3 93.7 26 .2-.1z" />
+                            <path fill="#fff"
+                                d="M255.8 268.3v46h55.7l-5.3 58.8-50.4 13.6v47.8l93.8-26 .7-7.4 10.7-120.3 1.1-12.5zm0-93.1v46h109.2l.9-10.2 2.1-23.6 1.1-12.2z" />
+                        </svg> HTML
+                    </div>
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-800 bg-slate-900 hover:border-indigo-500/50 transition-colors cursor-default text-sm font-semibold text-slate-200">
+                        <svg width="22" height="22" viewBox="0 0 248 31">
+                            <path fill="#06b6d4"
+                                d="M25.517 0C18.712 0 14.46 3.382 12.758 10.146c2.552-3.382 5.529-4.65 8.931-3.805 1.941.482 3.329 1.882 4.864 3.432 2.502 2.524 5.398 5.444 11.722 5.444 6.804 0 11.057-3.382 12.758-10.145-2.552 3.382-5.528 4.65-8.93 3.804-1.942-.482-3.33-1.882-4.865-3.431C34.736 2.92 31.841 0 25.517 0zM12.758 15.218C5.954 15.218 1.701 18.6 0 25.364c2.552-3.382 5.529-4.65 8.93-3.805 1.942.482 3.33 1.882 4.865 3.432 2.502 2.524 5.397 5.444 11.722 5.444 6.804 0 11.057-3.382 12.758-10.145-2.552 3.382-5.529 4.65-8.931 3.805-1.941-.483-3.329-1.883-4.864-3.432-2.502-2.524-5.398-5.445-11.722-5.445z" />
+                        </svg> Tailwind CSS
+                    </div>
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-800 bg-slate-900 hover:border-indigo-500/50 transition-colors cursor-default text-sm font-semibold text-slate-200">
+                        <svg width="22" height="22" viewBox="0 0 98 96">
+                            <path fill="#ffffff" fill-rule="evenodd" clip-rule="evenodd"
+                                d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0112.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z" />
+                        </svg> GitHub
+                    </div>
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-800 bg-slate-900 hover:border-indigo-500/50 transition-colors cursor-default text-sm font-semibold text-slate-200">
+                        <svg width="22" height="22" viewBox="0 0 256 289">
+                            <path d="M128 0L0 72v145l128 72 128-72V72z" fill="#539E43" />
+                            <path d="M128 38L46 85v95l82 47 82-47V85z" fill="#3d7a34" />
+                            <path
+                                d="M157 166c-3 5-9 9-16 9-10 0-19-8-19-19s9-19 19-19c7 0 13 4 16 9l18-11c-6-11-19-19-34-19-21 0-38 17-38 38s17 38 38 38c15 0 28-8 34-19z"
+                                fill="#fff" />
+                        </svg> Node.js
+                    </div>
                 </div>
             </div>
         </div>
@@ -330,8 +330,35 @@
                         </div>
                         <div
                             class="flex items-center gap-3 py-2 px-3 rounded-xl bg-slate-950 border border-slate-800/60">
-                            <span class="text-slate-500 text-xs font-mono font-bold">&lt;/&gt;</span>
-                            <span class="text-sm text-slate-300 font-medium">HTML / CSS / Tailwind</span>
+                            <svg width="16" height="16" viewBox="0 0 512 512">
+                                <path fill="#e44d26" d="M107.6 471l-33-370.8h362.8l-33 370.6L255.7 512z" />
+                                <path fill="#f16529" d="M256 480.5l120.9-33.5 28.2-316.3H256z" />
+                                <path fill="#ebebeb"
+                                    d="M256 268.3h-60.1l-4.2-47.1H256v-46H144.5l1.1 12.2 11.2 125.5H256zm0 130.7l-.2.1-50.8-13.7-3.2-36.3h-46.1l6.4 71.3 93.7 26 .2-.1z" />
+                                <path fill="#fff"
+                                    d="M255.8 268.3v46h55.7l-5.3 58.8-50.4 13.6v47.8l93.8-26 .7-7.4 10.7-120.3 1.1-12.5zm0-93.1v46h109.2l.9-10.2 2.1-23.6 1.1-12.2z" />
+                            </svg>
+                            <span class="text-sm text-slate-300 font-medium">HTML</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-3 py-2 px-3 rounded-xl bg-slate-950 border border-slate-800/60">
+                            <svg width="16" height="16" viewBox="0 0 512 512">
+                                <path fill="#1572b6" d="M107.6 471l-33-370.8h362.8l-33 370.6L255.7 512z" />
+                                <path fill="#33a9dc" d="M256 480.5l120.9-33.5 28.2-316.3H256z" />
+                                <path fill="#fff"
+                                    d="M256 268.3h-55.7v46h55.7zm0-93.1H147.5l4.3 46H256zm0 139.7l-50.8 13.7-3.2-36.3h-46.1l6.4 71.3 93.7 26z" />
+                                <path fill="#ebebeb"
+                                    d="M256 314.4v-46h55.4l-5.3 58.8-50.1 13.5zm0-139.2v46h107.2l-4.3-46zm0 185.3v47.8l93.5-26 .7-7.4 7.5-84.3h-46l-5.3 56.2z" />
+                            </svg>
+                            <span class="text-sm text-slate-300 font-medium">CSS</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-3 py-2 px-3 rounded-xl bg-slate-950 border border-slate-800/60">
+                            <svg width="16" height="16" viewBox="0 0 248 31">
+                                <path fill="#06b6d4"
+                                    d="M25.517 0C18.712 0 14.46 3.382 12.758 10.146c2.552-3.382 5.529-4.65 8.931-3.805 1.941.482 3.329 1.882 4.864 3.432 2.502 2.524 5.398 5.444 11.722 5.444 6.804 0 11.057-3.382 12.758-10.145-2.552 3.382-5.528 4.65-8.93 3.804-1.942-.482-3.33-1.882-4.865-3.431C34.736 2.92 31.841 0 25.517 0zM12.758 15.218C5.954 15.218 1.701 18.6 0 25.364c2.552-3.382 5.529-4.65 8.93-3.805 1.942.482 3.33 1.882 4.865 3.432 2.502 2.524 5.397 5.444 11.722 5.444 6.804 0 11.057-3.382 12.758-10.145-2.552 3.382-5.529 4.65-8.931 3.805-1.941-.483-3.329-1.883-4.864-3.432-2.502-2.524-5.398-5.445-11.722-5.445z" />
+                            </svg>
+                            <span class="text-sm text-slate-300 font-medium">Tailwind CSS</span>
                         </div>
                     </div>
                 </div>
@@ -389,7 +416,7 @@
                     </div>
                 </div>
 
-                <!-- AI & Tools -->
+                <!-- AI & Tooling -->
                 <div
                     class="bg-slate-900 rounded-2xl p-6 border border-slate-800 hover:border-indigo-500/40 transition-colors">
                     <div class="flex items-center gap-3 mb-6">
@@ -417,17 +444,65 @@
                                 <path fill="#f05032"
                                     d="M90.156 41.965L50.036 1.849a5.918 5.918 0 00-8.372 0l-8.328 8.332 10.566 10.566a7.03 7.03 0 017.23 1.684 7.04 7.04 0 011.673 7.277l10.183 10.183a7.04 7.04 0 010 9.951 7.045 7.045 0 01-9.951 0 7.04 7.04 0 01-1.555-7.637L49.63 33.213v26.21a7.04 7.04 0 010 9.951 7.045 7.045 0 01-9.951 0 7.04 7.04 0 010-9.951 7.05 7.05 0 012.28-1.528V33.029a7.07 7.07 0 01-2.28-1.527 7.047 7.047 0 01-1.534-7.68L29.769 13.257 1.845 41.176a5.918 5.918 0 000 8.372l40.12 40.116a5.918 5.918 0 008.372 0l39.82-39.82a5.918 5.918 0 000-8.879" />
                             </svg>
-                            <span class="text-sm text-slate-300 font-medium">Git / GitHub</span>
+                            <span class="text-sm text-slate-300 font-medium">Git</span>
                         </div>
                         <div
                             class="flex items-center gap-3 py-2 px-3 rounded-xl bg-slate-950 border border-slate-800/60">
-                            <span class="text-slate-500 text-xs">☁️</span>
-                            <span class="text-sm text-slate-300 font-medium">Cloudflare / Vercel</span>
+                            <svg width="16" height="16" viewBox="0 0 98 96">
+                                <path fill="#ffffff" fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0112.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z" />
+                            </svg>
+                            <span class="text-sm text-slate-300 font-medium">GitHub</span>
                         </div>
                         <div
                             class="flex items-center gap-3 py-2 px-3 rounded-xl bg-slate-950 border border-slate-800/60">
-                            <span class="text-slate-500 text-xs">⚡</span>
-                            <span class="text-sm text-slate-300 font-medium">Vite / Vercel AI SDK</span>
+                            <svg width="16" height="16" viewBox="0 0 100 100">
+                                <rect width="100" height="100" rx="16" fill="#F48120" />
+                                <path fill="#fff"
+                                    d="M67.8 60.4c.3-.9.2-1.9-.3-2.7-.5-.8-1.3-1.3-2.2-1.4l-28.6-.4c-.2 0-.4-.1-.5-.3-.1-.2-.1-.4 0-.5l1.9-4.9c.3-.9.2-1.9-.3-2.7-.5-.8-1.3-1.3-2.2-1.4L19 46c-.4 0-.7.3-.7.7 0 .1 0 .3.1.4l3.4 9.1c.3.9.2 1.9-.3 2.7-.5.8-1.3 1.3-2.2 1.4l-6 .1c-.4 0-.7.3-.7.7 0 .1 0 .3.1.4l2.6 6.9c.1.3.4.5.7.5H68c.3 0 .6-.2.7-.5l-.9-7.5z" />
+                                <path fill="#fff" opacity=".6"
+                                    d="M67.8 60.4l-1.1-7.2H37.6l-1.9 4.9c-.1.2-.1.4 0 .5.1.2.3.3.5.3l28.6.4c.9.1 1.7.6 2.2 1.4.5.8.6 1.8.3 2.7l-1 3.5h1.1c.3 0 .6-.2.7-.5l.7-6z" />
+                            </svg>
+                            <span class="text-sm text-slate-300 font-medium">Cloudflare</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-3 py-2 px-3 rounded-xl bg-slate-950 border border-slate-800/60">
+                            <svg width="16" height="16" viewBox="0 0 410 404">
+                                <path
+                                    d="M399.641 59.525l-183.998 332.06c-3.26 5.888-11.36 5.91-14.65.04L.65 59.566C-2.91 53.24 2.55 45.7 9.76 46.63l197.3 26.06c.99.13 1.99.13 2.98 0l194.84-26.04c7.19-.96 12.67 6.54 9.76 12.88z"
+                                    fill="url(#v1)" />
+                                <path
+                                    d="M292.08 1.02L156.73 28.33c-3.35.67-5.76 3.61-5.76 7.02l-.51 220.15c0 3.94 3.47 6.97 7.34 6.33l35.93-6.05c4.2-.71 7.93 2.74 7.6 6.98l-10.68 139.04c-.38 4.94 6.04 7.41 9.03 3.37l22.46-30.5c3.02-4.1 9.56-1.57 9.09 3.56l-6.74 74.5c-.49 5.43 7.09 7.63 9.74 2.8l170.85-320.98c2.85-5.36-1.59-11.49-7.6-10.48l-37.02 6.35c-4.28.73-7.96-2.87-7.45-7.19L303.13 8.29c.58-4.97-3.77-9.1-8.73-8.63l-2.32.21z"
+                                    fill="url(#v2)" />
+                                <defs>
+                                    <linearGradient id="v1" x1="6.1" y1="32.5" x2="235" y2="344.5"
+                                        gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#41d1ff" />
+                                        <stop offset="1" stop-color="#bd34fe" />
+                                    </linearGradient>
+                                    <linearGradient id="v2" x1="194.7" y1="8.9" x2="236.2" y2="292.9"
+                                        gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#ffd62e" />
+                                        <stop offset="1" stop-color="#f16729" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <span class="text-sm text-slate-300 font-medium">Vite+</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-3 py-2 px-3 rounded-xl bg-slate-950 border border-slate-800/60">
+                            <svg width="16" height="16" viewBox="0 0 100 100">
+                                <mask id="vsc2">
+                                    <path fill="#fff"
+                                        d="M70.9 3.8L38.4 33.5 15.6 17.4 5 22.9v54.2l10.6 5.5 23-16.1 32.4 29.7L95 85.9V14.1L70.9 3.8zm.1 66.1L50.1 50l20.9-19.9v39.8z" />
+                                </mask>
+                                <path fill="#0065a9"
+                                    d="M95 14.1L70.9 3.8 38.4 33.5 15.6 17.4 5 22.9v54.2l10.6 5.5 23-16.1 32.4 29.7L95 85.9V14.1z"
+                                    mask="url(#vsc2)" />
+                                <path fill="#007acc" d="M95 14.1v71.8L70.9 96.2V3.8L95 14.1z" />
+                                <path fill="#1f9cf0" d="M5 77.1l10.6 5.5V17.4L5 22.9v54.2z" />
+                            </svg>
+                            <span class="text-sm text-slate-300 font-medium">VS Code</span>
                         </div>
                     </div>
                 </div>
